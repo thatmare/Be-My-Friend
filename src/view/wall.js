@@ -292,16 +292,16 @@ export const wall = (navigateTo) => {
         const inputEditName = document.createElement('input');
         inputEditName.setAttribute('type', 'text');
         inputEditName.setAttribute('id', 'inputEditName');
-        inputEditName.value = `${post.petName}`;
+        // inputEditName.value = post.petName;
 
         const inputEditDescription = document.createElement('input');
         inputEditDescription.setAttribute('type', 'text');
         inputEditDescription.setAttribute('id', 'inputEditDescription');
-        inputEditDescription.value = post.description;
+        // inputEditDescription.value = post.description;
 
         const buttonEdit = document.createElement('button');
         buttonEdit.setAttribute('id', 'buttonEdit');
-        buttonEdit.setAttribute('type', 'submit');
+        // buttonEdit.setAttribute('type', 'submit');
         buttonEdit.textContent = 'Save';
 
         postsSection.append(postArticle, modal, modalConfirm, modalEdit);
@@ -313,7 +313,10 @@ export const wall = (navigateTo) => {
           modalEdit.open = true;
         });
 
-        buttonEdit.addEventListener('click', editPosts(post.id, inputEditName.value, inputEditDescription.value));
+        buttonEdit.addEventListener('click', (e) => {
+          // e.preventDefault();
+          editPosts(post.id, inputEditName.value, inputEditDescription.value);
+        });
 
         iconoPoints.addEventListener('click', () => {
           menuPoints.classList.toggle('active');

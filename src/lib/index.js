@@ -41,12 +41,12 @@ getDocs(colRef)
     console.log(error.message);
   });
 // edit documents
-export const editPosts = (id, petName, petDescription) => {
+export const editPosts = (id, newPetName, newPetDescription) => {
   const documentEditDoc = newdoc(colRef, id);
-  console.log(petName);
+
   return updateDoc(documentEditDoc, {
-    petName,
-    description: petDescription,
+    petName: newPetName,
+    description: newPetDescription,
     timestamp: serverTimestamp(),
   });
 };
