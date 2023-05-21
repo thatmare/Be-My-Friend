@@ -1,8 +1,33 @@
-// importamos la funcion que vamos a testear
-import { myFunction } from '../src/lib/index';
+import { exit } from '../src/lib/index.js';
+// Mock de la función signOut de Firebase
+jest.mock('firebase/auth', () => ({
+  auth: jest.(() => ({
+    signOut: jest.fn(() => Promise.resolve()),
+  })),
+}));
 
-describe('myFunction', () => {
-  it('debería ser una función', () => {
-    expect(typeof myFunction).toBe('function');
+describe('exit', () => {
+  it('should call signOut and navigate to welcome', async () => {
+    const navigateTo = jest.fn();
+    const consoleLogSpy = jest.spyOn(console, 'log');
+
+    await exit(navigateTo);
+
+    expect(firebase.auth().signOut).toHaveBeenCalled();
+    expect(consoleLogSpy).toHaveBeenCalledWith('saliendo');
+    expect(navigateTo).toHaveBeenCalledWith('/');
+  });
+
+  it('should handle error and log it', async () => {
+    const navigateTo = jest.fn();
+    const consoleLogSpy = jest.spyOn(console, 'log');
+    const error = new Error('Sign-out failed');
+    firebase.auth().signOut.mockRejectedValueOnce(error);
+
+    await exit(navigateTo);
+
+    expect(firebase.auth().signOut).toHaveBeenCalled();
+    expect(consoleLogSpy).toHaveBeenCalledWith(error);
+    expect(navigateTo).not.toHaveBeenCalled();
   });
 });
