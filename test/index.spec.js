@@ -1,5 +1,4 @@
 import { exit } from '../src/lib/index.js';
-
 // Mock de la función signOut de Firebase
 jest.mock('firebase/auth', () => ({
   auth: jest.fn(() => ({
