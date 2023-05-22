@@ -313,6 +313,7 @@ export const wall = (navigateTo) => {
       // -------------------------------------------------------- Modal para editar post
       const modalEdit = document.createElement('dialog');
       modalEdit.setAttribute('class', 'modalEdit');
+      modalEdit.setAttribute('id', 'modalEdit');
 
       const editContainer = document.createElement('div');
       editContainer.setAttribute('class', 'editContainer');
@@ -383,7 +384,7 @@ export const wall = (navigateTo) => {
           // se edita el post, y se envian los valores del input para que sean actualizados
           editPosts(post.id, inputEditName.value, inputEditDescription.value);
           // Cerramos el modal
-          modalEdit.close();
+          modalEdit.remove();
           // Abrimos modal de confirmación
           modalConfirmEdit.open = true;
           // lo cerramos a los 3 sg

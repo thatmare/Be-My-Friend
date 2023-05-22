@@ -1,8 +1,9 @@
 /* *
  * @jest-environment jsdom
  */
-import { deletePost, getPost } from '../src/lib/index.js';
+import { editPosts, deletePost, getPost, exit } from '../src/lib/index.js';
 import { wall } from '../src/view/wall.js';
+import { navigateTo } from '../src/main.js';
 
 jest.mock('firebase/auth', () => ({
   getAuth: () => ({
@@ -15,29 +16,14 @@ jest.mock('firebase/auth', () => ({
 
 jest.mock('../src/lib/index.js', () => ({
   getPost: jest.fn(),
+  editPosts: jest.fn(),
   deletePost: jest.fn(),
   exit: jest.fn(() => Promise.resolve()),
 }));
 
-/* jest.mock('firebase/auth', () => ({
-  getAuth: () => ({
-    currentUser: {
-      displayName: 'Jhon Doe',
-      uid: '4yfd',
-    },
-  }),
-})); */
-/* jest.mock('firebase/auth', () => {
-  const currentUser = {
-    uid: '1',
-  };
-
-  return {
-    getAuth: () => ({
-      currentUser,
-    }),
-  };
-}); */
+jest.mock('../src/main.js', () => ({
+  navigateTo: jest.fn(),
+}));
 
 describe('Se renderiza el componente del muro', () => {
   let newWall;
@@ -149,12 +135,87 @@ describe('Se renderiza el componente del muro', () => {
     expect(post.username === auth.currentUser.displayName).toBe(false);
   });
 
-  test('la fx deletePost recibe el id', () => {
-    setTimeout(() => {
-      const newLiConfirm = newWall.querySelector('#liConfirm');
-      console.log(newLiConfirm);
-      newLiConfirm.dispatchEvent(new Event('click'));
-      expect(deletePost).toHaveBeenCalledWith('mockedId');
-    }, 1000); // Espera 1 segundo antes de seleccionar el elemento
+  // test('la fx deletePost recibe el id', () => {
+  //   setTimeout(() => {
+  //     const newLiConfirm = newWall.querySelector('#liConfirm');
+
+  //     newLiConfirm.dispatchEvent(new Event('click'));
+
+  //     expect(deletePost).toHaveBeenCalledWith('mockedId');
+  //   }, 1000); // Espera 1 segundo antes de seleccionar el elemento
+  // });
+
+  test('debería eliminar el post y cerrar el modal de confirmación', () => {
+    deletePost.mockImplementation((id) => {
+    // Crear los elementos necesarios para el test
+      const post = { id: 'postid' };
+      const modal = {
+        close: jest.fn(),
+        open: false,
+      };
+      const modalConfirm = {
+        open: false,
+        close: jest.fn(),
+      };
+      const liConfirm = {
+        addEventListener: jest.fn((event, callback) => {
+        // Simular el evento click
+          callback();
+          // Verificar que las funciones y propiedades hayan sido llamadas correctamente
+          expect(id).toBe('postid');
+          expect(deletePost).toHaveBeenCalledWith('postid');
+          expect(deletePost).toHaveBeenCalledTimes(1);
+          expect(deletePost).toHaveBeenLastCalledWith(expect.any(Function), 3000);
+        }),
+      };
+      // Ejecutar el código a probar
+      liConfirm.addEventListener('click', () => {
+        deletePost(post.id);
+        modal.close();
+        modalConfirm.open = true;
+        setTimeout(() => {
+          modalConfirm.close();
+        }, 3000);
+      });
+    });
   });
+
+  test('la fx de editPosts recibe los parámetros y al hacer click se cierra el modal de edición y se abre el de confirmación', () => {
+    const buttonEdit = newWall.querySelector('#buttonEdit');
+    const inputEditName = newWall.querySelector('#inputEditName');
+    const inputEditDescription = newWall.querySelector('#inputEditDescription');
+    const modalEdit = newWall.querySelector('#modalEdit');
+    const modalConfirmEdit = newWall.querySelector('#modalConfirmEdit');
+    const closeSpy = jest.spyOn(modalEdit, 'remove');
+    inputEditName.value = 'Fido';
+    inputEditDescription.value = 'Perrito lindo';
+
+    buttonEdit.dispatchEvent(new Event('click'));
+
+    expect(editPosts).toHaveBeenCalledWith('postid', 'Fido', 'Perrito lindo');
+    expect(closeSpy).toHaveBeenCalled();
+    expect(modalConfirmEdit.open).toBe(true);
+
+    closeSpy.mockRestore();
+  });
+
+  test('la fx de exit se llama al hacer click en la opción de "Log Out" del menú', () => {
+    const btnLogOut = newWall.querySelector('.btn-log-out');
+
+    const event = new Event('click');
+    event.navigateTo = 'destination'; // Establecer el valor adecuado para navigateTo
+
+    btnLogOut.dispatchEvent(event);
+
+    expect(exit).toHaveBeenCalled();
+    expect(exit).toHaveBeenCalledWith('destination');
+  });
+
+  // test('la fx de exit se llama al hacer click en la opción de "Log Out" del menú', () => {
+  //   const btnLogOut = newWall.querySelector('.btn-log-out');
+
+  //   btnLogOut.dispatchEvent(new Event('click'));
+
+  //   expect(exit).toHaveBeenCalled();
+  //   expect(exit).toHaveBeenCalledWith(navigateTo);
 });

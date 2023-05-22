@@ -10,7 +10,8 @@ import { newpost } from '../src/view/newpost';
 jest.mock('firebase/auth', () => ({
   getAuth: () => ({
     currentUser: {
-      displayName: 'John Doe', // Simular el displayName del usuario actual
+      displayName: 'John Doe',
+      uid: '123', // Simular el displayName del usuario actual
     },
   }),
 }));
