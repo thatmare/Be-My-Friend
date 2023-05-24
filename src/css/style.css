@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Cada décima de rem tendrá valor de un pixel. Viene de (10/16) * 100 = 62.5 */
 html {
     font-size: 62.5%;
 }
@@ -12,14 +13,10 @@ html {
 body {
     background-color: #F0DBDB;
     font-family: 'Nunito', sans-serif;
+    color: #292D32;
 }
 
-.group {
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-/* Vista de bienvenida */
+/* Wallpaper */
 .bodyimg {
     background-color: rgba(255, 255, 255, 0.5);
     background-image: url(../img/wallpaper.png);
@@ -50,7 +47,7 @@ nav {
     justify-content: space-between;
 }
 
-/* Navbar de wall.js*/
+/* Navbar del muro/timeline */
 .wallNav{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
@@ -58,10 +55,12 @@ nav {
     grid-column-gap: 10px;
     grid-row-gap: 0px;
 }
+
 .navNewpost{
     justify-content: unset;
 }
 
+/* Botones de Home, Log In, Sign Up*/
 nav ul{
     list-style: none;
 }
@@ -87,6 +86,7 @@ nav ul li a{
 .nav-menu.active {
     right: 0;
 }
+
 .nav-menu {
     position: fixed;
     z-index: 1;
@@ -101,6 +101,7 @@ nav ul li a{
     box-shadow:
         0 10px 27px rgba(0, 0, 0, 0.05);
 }
+
 .bar {
     border-radius: 10px;
     display: block;
@@ -111,6 +112,7 @@ nav ul li a{
     transition: all 0.3s ease-in-out;
     background-color: #292D32;
 }
+
 .hamburger.active .bar:nth-child(2) {
     opacity: 0;
 }
@@ -128,6 +130,7 @@ nav ul li a{
     height: 20px;
     font-size: 1.4rem;
 }
+
 .nav-item:hover {
     cursor: pointer;
 }
@@ -137,8 +140,6 @@ nav ul li a{
     cursor: pointer;
     margin: 5px;
 }
-
-
 /* Fin de menú de hamburguesa*/
 
 /* Titulo de wall*/
@@ -151,12 +152,9 @@ nav ul li a{
 
 /* Logo*/
 header img {
-/*     position: absolute; */
     width: 42px;
     height: 40px;
     margin: 4px;
-/*     left: 10px;
-    top: 3px; */
 }
 
 /* Mensaje de bienvenida*/
@@ -171,7 +169,7 @@ header img {
     padding: 3%;
 } 
 
-/* Inputs de forms para log in y sign up*/
+/*-------------------------------------------------Formularios de log in y sign up*/
 form {
     width: 75vw;
     margin: 4rem auto 5rem ;
@@ -181,6 +179,7 @@ form {
     box-shadow: 0px 0px 5px gray;
 }
 
+/* Inputs de forms para log in y sign up*/
 form input {
     border-radius: 5px;
     border-color: #EA907A;
@@ -201,12 +200,20 @@ form ul {
     margin-top: 3px;
 }
 
+/* Contenedor para email y password*/
+.group {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 .login{
     height: 100vh;
 }
+
 .register{
     margin-bottom: 5rem;
 }
+
 .containerLoginOptions {
     display: flex;
     flex-direction: column;
@@ -216,6 +223,7 @@ form ul {
     font-size: 1.6rem;
 }
 
+/* Mensajes de error en log in */
 #spanErrorEmail, #spanErrorPassword, #spanErrorPasswordAgain {
     font-size: 1.1rem;
 }
@@ -236,7 +244,11 @@ hr {
     text-align: center;
     font-weight: unset;
 }
-
+#btnSignup{
+    color: #551a8b;
+    cursor: pointer;
+    text-decoration: underline;
+}
 #btnLogin {
     border-radius: 5px;
     background-color: #4285F4;
@@ -248,6 +260,7 @@ hr {
     margin: auto;
     font-size: 15px;
     font-weight:500;
+    cursor: pointer;
 }
 
 #btnLogin:hover {
@@ -270,6 +283,7 @@ hr {
     height: 34px;
     margin: auto;
     display: block;
+    cursor: pointer;
 }
 
 #btnRegister:hover {
@@ -281,10 +295,11 @@ hr {
     width: 15rem;
     height: 4rem;
     background-color: white;
-    color: black;
+    color: rgba(0, 0, 0, 0.54);
     border: 1px solid gray;
     box-shadow: 0px 3px 3px gray;
     border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
     margin-top: 8px;
@@ -292,9 +307,14 @@ hr {
     align-items: center;
     flex-direction: row-reverse;
     justify-content: center;
+    cursor: pointer;
 }
 
-/*Email and password validations*/
+.btnGoogle img {
+    height: 42px;
+}
+
+/* Validaciones de email y contraseña segura */
 #txtEmail.valid {
     border: 2px solid green;
 }
@@ -376,13 +396,13 @@ hr {
     color: #292D32;
 }
 
-/*Pet cads icons to like and match*/
+/* Íconos para tarjetas en Welcome */
 .interactionpets {
     display: grid;
     grid-template-columns: 1fr 2fr 0.5fr;
 }
 
-/* Testimonies */
+/* Testimonios */
 .testimonies{
     font-family: 'Acme', sans-serif;
     font-size: 2.4rem;
@@ -400,6 +420,33 @@ hr {
 }
 
 /*-------------------------------------------------Inicia muro/timeline*/
+
+/* Modal de información de la patita */
+.modalPaw{
+    position: absolute;
+    z-index: 2;
+    background-color:#EA907A;
+    border: none;
+    margin: 2rem auto;
+    width: 30rem;
+    height: 14%;
+    font-size: 2.4rem;
+    text-align: center;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #292D32;
+    font-weight:bold;
+}
+
+.modalPaw img{
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: 1rem;
+    vertical-align: middle;
+}
+
 .postsSection {
     max-width: 600px;
     margin: auto;
@@ -436,21 +483,38 @@ hr {
     font-size: 1.6rem;
 }
 
-/* Reacciones del post*/
-.reactionContainer {
-    display: grid;
-    grid-template-columns: 0.4fr 3fr 0.2fr;
-    grid-column-gap: 4px;
-}
-
-.newPostDiv section nav img {
+.newPostDiv section nav img { /* imagen de regreso desde newpost al muro*/
     width: 2.4rem;
     height: 2.4rem;
     object-fit: contain;
     margin-left: 2rem;
     cursor: pointer;
 }
-/* Menu de eliminar y editar post*/
+
+/* Reacciones del post*/
+.postArticle .reactionContainer img {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.reactionContainer {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 12fr 1fr;
+    grid-column-gap: 4px;
+}
+
+#pawMatch{
+    grid-column: 5;
+}
+
+.likeCount{
+    font-size: 1.4rem;
+    margin: auto 0;
+    text-align: left;
+}
+
+/* Menú de eliminar y editar post*/
+/* Contenedor de usuario y menú de 3 puntos*/
 .divUsersPointsEl{
     display: flex;
     flex-direction: row;
@@ -462,12 +526,8 @@ hr {
     cursor: pointer;
 }
 
+/* Menú de 3 puntos desplegado */
 .menuPoints{
-    /* right: fixed; */
-   /*  z-index: 1;
-    top: 40rem;
-    bottom: 100%;
-    flex-direction: column; */
     background-color: #292D32;
     color: white;
     width: 100%;
@@ -476,16 +536,13 @@ hr {
     text-align: center;
     box-shadow:
         0 10px 27px rgba(0, 0, 0, 0.05);
-    bottom: 200%;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     list-style: none;
     left:0;
     font-size: 2.4rem;
-}
-.menuPoints.active {
-    /* top:85%; */
-    bottom:0;
+    border: none;
+    bottom: 0;
 }
 
 .menuPoints .iconClose{
@@ -505,10 +562,21 @@ hr {
     cursor: pointer;
 }
 
+.ulModal li {
+    list-style: none;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.ulModal li:nth-child(1) {
+    color: #ff0000;
+}
+
 .menuPoints .liDelete {
     color: #ff0000;
 }
 
+/*Modal para confirmar eliminado*/
 #modal{
     position: absolute;
     margin: auto;
@@ -528,18 +596,80 @@ hr {
     padding: 1rem;
 }
 
-.ulModal li {
-    list-style: none;
-    padding: 1rem;
+.bodyimg footer img:hover{ /* íconos de navegación*/
     cursor: pointer;
 }
 
-.ulModal li:nth-child(1) {
-    color: #ff0000;
+#modalConfirm img {
+    margin: 0 1rem;
 }
 
-.postsSection #modalConfirm {
+/* Modal/formulario de edición */
+.modalEdit {
     position: absolute;
+    margin: 0rem auto;
+    width: 30rem;
+    height: 42rem;
+    background: #292D32;
+    border-radius: 15px;
+    border: none;
+    color: #FFFFFF;
+    font-size: 2.4rem;
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.editContainer {
+   display: flex;
+   flex-direction: row;
+   gap: 1rem;
+}
+
+.editContainer .iconClose{
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.editHr {
+    margin: 1rem auto;
+}
+
+.formEdit {
+    background-color: #292D32;
+    box-shadow: none;
+    width: 100%;
+    margin: unset;
+}
+
+.formEdit #inputEditName, .formEdit #inputEditDescription{
+    background-color: #292D32;
+    color: white;
+    border-color:#EA907A ;
+    padding: 0.5rem;
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+#buttonEdit{
+    position: absolute;
+    width: 7.8rem;
+    height: 3rem;
+    right: 2rem;
+    top: 2rem;
+    background: #DBA39A;
+    border: 1px solid #EA907A;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 20px;
+    letter-spacing: 0.1em;
+    color: #6E0707;
+}
+
+/* Modal de confirmación de eliminado y editado */
+#modalConfirm, #modalConfirmEdit {
+    position: fixed;
     margin: auto;
     width: 28rem;
     height: 10rem;
@@ -552,39 +682,6 @@ hr {
     font-size: 2.4rem;
     text-align: center;
     z-index: 1;
-}
-.postArticle .reactionContainer img {
-    width: 2.4rem;
-    height: 2.4rem;
-}
-.bodyimg footer img:hover{
-    cursor: pointer;
-}
-
-#modalConfirm img {
-    margin: 0 1rem;
-}
-
- /* Íconos de navegación*/
- footer {
-    background-color: #EA907A;
-    height: 40px;
-    color:white;    
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    font-size: 1.4rem;
-    font-weight: 700;
-}
-
-.bodyimg footer {
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 2.4rem 0;
 }
 
 /*-------------------------------------------------Inicia crear publicación/post*/
@@ -605,7 +702,6 @@ hr {
     margin-left: 2rem;
 }
 
-
 .newPostDiv .formpost {
     background-color: #292D32;
     box-shadow: unset;
@@ -619,13 +715,14 @@ hr {
     align-items: center;
 }
 
-.formpost .profilePic {
+/* Reeplicando estilos para forms de crear post y editar post*/
+.formpost .profilePic, .modalEdit .profilePic {
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 24px;
 }
 
-.formpost .userName {
+.formpost .userName, .modalEdit .userName {
     font-size: 1.8rem;
     color: white;
     font-weight: 700;
@@ -665,10 +762,29 @@ hr {
     width: 100%;
 }
 
+/* Íconos de navegación*/
+footer {
+    background-color: #EA907A;
+    height: 40px;
+    color:white;    
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
 .footerParagraph, .gitHubLinks {
     color: #292D32;
 }
 
-#modalEdit {
-    z-index: 1;
+.bodyimg footer {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2.4rem 0;
+    z-index: 2;
 }

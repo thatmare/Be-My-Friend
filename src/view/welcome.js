@@ -1,4 +1,3 @@
-import { login } from './login';
 import { footer } from './footer';
 
 export const welcome = (navigateTo) => {
@@ -6,13 +5,16 @@ export const welcome = (navigateTo) => {
   const bodyimg = document.createElement('div');
   bodyimg.setAttribute('class', 'bodyimg');
 
+  // ------------------------------------------------- Contenedor de muro de Bienvenida
+
+  // ------------------------------------------- Sección del header con logo y botones de navegación
   const header = document.createElement('header');
+
+  const nav = document.createElement('nav');
 
   const logoImg = document.createElement('img');
   logoImg.setAttribute('src', 'img/logo.png');
   logoImg.setAttribute('alt', 'This is the logo. It is a dog paw inside a heart.');
-
-  const nav = document.createElement('nav');
 
   const ul = document.createElement('ul');
 
@@ -22,7 +24,7 @@ export const welcome = (navigateTo) => {
   const loginLink = document.createElement('a');
   loginLink.textContent = 'Log In';
   loginLink.addEventListener('click', () => {
-    navigateTo('/login');
+    navigateTo('/login');// navegación a componente login
   });
 
   const signUpLink = document.createElement('li');
@@ -30,15 +32,18 @@ export const welcome = (navigateTo) => {
   const signUp = document.createElement('a');
   signUp.textContent = 'Sign Up';
   signUp.addEventListener('click', () => {
-    navigateTo('/register');
+    navigateTo('/register');// navegación a componente register
   });
+  // ------------------------------------------------------------------- Fin de header
 
+  // --------------------------------------------- Contenedor de toda la info del muro de Bienvenida
   const main = document.createElement('main');
   main.setAttribute('id', 'main');
 
   const h1 = document.createElement('h1');
   h1.textContent = 'Be My Friend';
 
+  // Mensaje de Bienvenida
   const welcomeMessage = document.createElement('p');
   welcomeMessage.setAttribute('class', 'welcomemessage');
   welcomeMessage.innerHTML = 'Welcome <br>Your next friend is waiting for you. Check animals available to adopt!';
@@ -72,24 +77,28 @@ export const welcome = (navigateTo) => {
   inputLike1.setAttribute('type', 'image');
   inputLike1.setAttribute('src', 'img/megusta.png');
   inputLike1.setAttribute('alt', 'Heart icon to like the pet');
-  inputLike1.addEventListener('click', login);
-  inputLike1.addEventListener('mouseover', function () {
-    this.src = 'img/megustarojo.png';
+  inputLike1.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputLike1.addEventListener('mouseover', () => {
+    inputLike1.src = 'img/megustarojo.png';
   });
-  inputLike1.addEventListener('mouseout', function () {
-    this.src = 'img/megusta.png';
+  inputLike1.addEventListener('mouseout', () => {
+    inputLike1.src = 'img/megusta.png';
   });
 
   const inputMatch1 = document.createElement('input');
   inputMatch1.setAttribute('type', 'image');
   inputMatch1.setAttribute('src', 'img/matchvacio.png');
   inputMatch1.setAttribute('alt', 'This footprint icon is to match with a pet, it means you want to adopt it.');
-  inputMatch1.addEventListener('click', login);
-  inputMatch1.addEventListener('mouseover', function () {
-    this.src = 'img/match.png';
+  inputMatch1.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputMatch1.addEventListener('mouseover', () => {
+    inputMatch1.src = 'img/match.png';
   });
-  inputMatch1.addEventListener('mouseout', function () {
-    this.src = 'img/matchvacio.png';
+  inputMatch1.addEventListener('mouseout', () => {
+    inputMatch1.src = 'img/matchvacio.png';
   });
 
   // Tarjeta de mascota 2
@@ -114,24 +123,28 @@ export const welcome = (navigateTo) => {
   inputLike2.setAttribute('type', 'image');
   inputLike2.setAttribute('src', 'img/megusta.png');
   inputLike2.setAttribute('alt', 'Heart icon to like the pet');
-  inputLike2.addEventListener('click', login);
-  inputLike2.addEventListener('mouseover', function () {
-    this.src = 'img/megustarojo.png';
+  inputLike2.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputLike2.addEventListener('mouseover', () => {
+    inputLike2.src = 'img/megustarojo.png';
   });
-  inputLike2.addEventListener('mouseout', function () {
-    this.src = 'img/megusta.png';
+  inputLike2.addEventListener('mouseout', () => {
+    inputLike2.src = 'img/megusta.png';
   });
 
   const inputMatch2 = document.createElement('input');
   inputMatch2.setAttribute('type', 'image');
   inputMatch2.setAttribute('src', 'img/matchvacio.png');
   inputMatch2.setAttribute('alt', 'This footprint icon is to match with a pet, it means you want to adopt it.');
-  inputMatch2.addEventListener('click', login);
-  inputMatch2.addEventListener('mouseover', function () {
-    this.src = 'img/match.png';
+  inputMatch2.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputMatch2.addEventListener('mouseover', () => {
+    inputMatch2.src = 'img/match.png';
   });
-  inputMatch2.addEventListener('mouseout', function () {
-    this.src = 'img/matchvacio.png';
+  inputMatch2.addEventListener('mouseout', () => {
+    inputMatch2.src = 'img/matchvacio.png';
   });
 
   // Tarjeta de mascota 3
@@ -156,24 +169,28 @@ export const welcome = (navigateTo) => {
   inputLike3.setAttribute('type', 'image');
   inputLike3.setAttribute('src', 'img/megusta.png');
   inputLike3.setAttribute('alt', 'Heart icon to like the pet');
-  inputLike3.addEventListener('click', login);
-  inputLike3.addEventListener('mouseover', function () {
-    this.src = 'img/megustarojo.png';
+  inputLike3.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputLike3.addEventListener('mouseover', () => {
+    inputLike3.src = 'img/megustarojo.png';
   });
-  inputLike3.addEventListener('mouseout', function () {
-    this.src = 'img/megusta.png';
+  inputLike3.addEventListener('mouseout', () => {
+    inputLike3.src = 'img/megusta.png';
   });
 
   const inputMatch3 = document.createElement('input');
   inputMatch3.setAttribute('type', 'image');
   inputMatch3.setAttribute('src', 'img/matchvacio.png');
   inputMatch3.setAttribute('alt', 'This footprint icon is to match with a pet, it means you want to adopt it.');
-  inputMatch3.addEventListener('click', login);
-  inputMatch3.addEventListener('mouseover', function () {
-    this.src = 'img/match.png';
+  inputMatch3.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputMatch3.addEventListener('mouseover', () => {
+    inputMatch3.src = 'img/match.png';
   });
-  inputMatch3.addEventListener('mouseout', function () {
-    this.src = 'img/matchvacio.png';
+  inputMatch3.addEventListener('mouseout', () => {
+    inputMatch3.src = 'img/matchvacio.png';
   });
 
   // Tarjeta de mascota 4
@@ -198,27 +215,32 @@ export const welcome = (navigateTo) => {
   inputLike4.setAttribute('type', 'image');
   inputLike4.setAttribute('src', 'img/megusta.png');
   inputLike4.setAttribute('alt', 'Heart icon to like the pet');
-  inputLike4.addEventListener('click', login);
-  inputLike4.addEventListener('mouseover', function () {
-    this.src = 'img/megustarojo.png';
+  inputLike4.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputLike4.addEventListener('mouseover', () => {
+    inputLike4.src = 'img/megustarojo.png';
   });
-  inputLike4.addEventListener('mouseout', function () {
-    this.src = 'img/megusta.png';
+  inputLike4.addEventListener('mouseout', () => {
+    inputLike4.src = 'img/megusta.png';
   });
 
   const inputMatch4 = document.createElement('input');
   inputMatch4.setAttribute('type', 'image');
   inputMatch4.setAttribute('src', 'img/matchvacio.png');
   inputMatch4.setAttribute('alt', 'This footprint icon is to match with a pet, it means you want to adopt it.');
-  inputMatch4.addEventListener('click', login);
-  inputMatch4.addEventListener('mouseover', function () {
-    this.src = 'img/match.png';
+  inputMatch4.addEventListener('click', () => {
+    navigateTo('/login');
+  });// se envia a login ya que no hay usuario registrado
+  inputMatch4.addEventListener('mouseover', () => {
+    inputMatch4.src = 'img/match.png';
   });
-  inputMatch4.addEventListener('mouseout', function () {
-    this.src = 'img/matchvacio.png';
+  inputMatch4.addEventListener('mouseout', () => {
+    inputMatch4.src = 'img/matchvacio.png';
   });
   // ------------------------------------------------- Fin de tarjetas
 
+  // ------------------------------------------------- Sección de contenedores de testimonios
   const sectionTestimonies = document.createElement('section');
   sectionTestimonies.setAttribute('class', 'contenedortestimonios');
 
@@ -230,14 +252,15 @@ export const welcome = (navigateTo) => {
   messageTestimony1.setAttribute('class', 'messagetesti');
 
   const pTestimony1 = document.createElement('p');
-  pTestimony1.innerHTML = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...”<br>-Name, City';
+  pTestimony1.innerHTML = '“¡Hola a todos! Quiero compartir mi increíble experiencia utilizando la red social "Be My Friend" para adoptar a mi querida mascota. Desde el momento en que me uní a esta plataforma, supe que había encontrado el lugar perfecto para encontrar a mi nuevo compañero peludo. La cantidad de animales disponibles era impresionante: perros, gatos, conejos e incluso algunas especies exóticas.”<br>-Lourdes, Santiago';
 
   const messageTestimony2 = document.createElement('div');
   messageTestimony2.setAttribute('class', 'messagetesti');
 
   const pTestimony2 = document.createElement('p');
-  pTestimony2.innerHTML = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...”<br>-Name, City';
+  pTestimony2.innerHTML = '“Finalmente, encontré a mi compañero perfecto: un encantador perro llamado Max. La experiencia de adopción a través de Be My Friend fue sencilla y sin complicaciones. Una vez que decidí adoptar a Max, todo el proceso de papeleo y trámites se llevó a cabo a través de la plataforma. La organización y el apoyo brindados por "Be My Friend" y el refugio involucrado hicieron que el proceso fuera ágil y sin estrés.”<br>-Cecilia, Monterrey';
 
+  // ------------------------------------------------ sección de appends
   bodyimg.append(header, main, footer());
   header.append(nav);
   nav.append(logoImg, ul);

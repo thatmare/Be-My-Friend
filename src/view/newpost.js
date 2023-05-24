@@ -4,6 +4,7 @@ export const newpost = (navigateTo) => {
   const newPostDiv = document.createElement('div');
   newPostDiv.setAttribute('class', 'newPostDiv');
 
+  // ----------------------------------------------------- Encabezado para regresar al muro
   const header = document.createElement('header');
 
   const logoImg = document.createElement('img');
@@ -25,6 +26,7 @@ export const newpost = (navigateTo) => {
 
   const iconArrow = document.createElement('img');
   iconArrow.setAttribute('src', '../img/arrow.png');
+  iconArrow.setAttribute('id', 'iconArrow');
   iconArrow.addEventListener('click', () => {
     navigateTo('/wall');
   });
@@ -33,10 +35,12 @@ export const newpost = (navigateTo) => {
   pCreatePost.setAttribute('id', 'pCreatePost');
   pCreatePost.textContent = 'Create post';
 
+  // ----------------------------------------------------- Formulario para crear post
   const formPost = document.createElement('form');
   formPost.setAttribute('class', 'add');
   formPost.setAttribute('class', 'formpost');
 
+  // Contenedor para username y profilepic
   const userContainer = document.createElement('div');
   userContainer.setAttribute('class', 'userContaier');
 
@@ -48,6 +52,7 @@ export const newpost = (navigateTo) => {
   userName.setAttribute('class', 'userName');
   userName.textContent = auth.currentUser.displayName;
 
+  // Inputs del form
   const petName = document.createElement('input');
   petName.setAttribute('placeholder', 'Pet name');
   petName.setAttribute('type', 'text');
@@ -68,9 +73,10 @@ export const newpost = (navigateTo) => {
   btnPost.setAttribute('type', 'submit');
   btnPost.textContent = 'POST';
 
+  // Ejecución de addPost: si los campos están vacíos no se puede publicar
   formPost.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (petName.value !== '' || petDescription.value !== '') {
+    if (petName.value !== '' && petDescription.value !== '') {
       addPost(petName.value, petDescription.value).then(() => {
         formPost.reset();
         navigateTo('/wall');
@@ -81,6 +87,7 @@ export const newpost = (navigateTo) => {
     }
   });
 
+  // Inserción de nodos
   newPostDiv.append(header, section, formPost);
   header.append(nav);
   nav.append(logoImg, h1);

@@ -24,7 +24,7 @@
         font-size: 1.8rem;
     }
 
-    /* nav bar en muro/yimeline*/
+    /* nav bar en muro/timeline*/
     .wallNav{
         grid-template-columns: 0.5fr 8fr 0.5fr;
     }
@@ -101,7 +101,6 @@
     }
 
     /* Formularios de login y sign up*/
-
     form {
         width: 60vw;
         margin-bottom: 5rem;
@@ -121,7 +120,7 @@
     .formpost #Post {
         font-size: 2rem;
         height: 4.6rem;
-        top: 8rem;
+        top: 6.4rem;
     }
 
     #spanErrorEmail {
@@ -149,7 +148,7 @@
 
     .labelQuestions {
         font-size: 2.2rem;
-        margin: -1rem 10%;
+        margin: auto 10%;
     }
 
     .labelQuestions label {
@@ -183,6 +182,7 @@
         font-size: 2.2rem;
         margin-bottom: 3rem;
     }
+    
     /* Menu de eliminar y editar post*/
     .menuPoints {
         position: absolute;
@@ -190,11 +190,8 @@
         min-height: 20rem;
         width: 32rem;
         border-radius: 15px;
-    }
-
-    .menuPoints.active {
-        top: 3.6rem;
-        left: 24.4rem;
+        left: 24rem;
+        bottom: -12rem;
     }
 
     .menuPoints .iconClose{
@@ -206,6 +203,18 @@
         height: 12rem;
         z-index: 1;
         padding: 2rem;
+    }
+    .modalEdit{
+        width: 56rem;
+        height: 36rem;
+    }
+    .formEdit{
+        height: 24rem;
+        margin: -1.5rem auto;
+    }
+    #inputEditDescription{
+        height: 14rem;
+        width: 40rem;
     }
 
     /* Fin de formularios*/

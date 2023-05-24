@@ -1,5 +1,5 @@
 import {
-  exit, deletePost, auth, editPosts, getPost,
+  exit, deletePost, editPosts, getPost, likePost, dislikePost, auth,
 } from '../lib/index.js';
 
 export const wall = (navigateTo) => {
@@ -31,30 +31,31 @@ export const wall = (navigateTo) => {
   const containerIcons = document.createElement('div');
   containerIcons.setAttribute('class', 'containerIcons');
 
-  const iconHome2 = document.createElement('img');
-  iconHome2.setAttribute('src', '../img/HOME.png');
-  iconHome2.setAttribute('class', 'containerIcons');
+  const iconHomeHeader = document.createElement('img');
+  iconHomeHeader.setAttribute('src', '../img/HOME.png');
+  iconHomeHeader.setAttribute('class', 'containerIcons');
 
-  const iconSearch2 = document.createElement('img');
-  iconSearch2.setAttribute('src', '../img/LUPA.png');
-  iconSearch2.setAttribute('class', 'containerIcons');
+  const iconSearchHeader = document.createElement('img');
+  iconSearchHeader.setAttribute('src', '../img/LUPA.png');
+  iconSearchHeader.setAttribute('class', 'containerIcons');
 
-  const iconAdd2 = document.createElement('img');
-  iconAdd2.setAttribute('src', '../img/AÑADIRINACTIVO.png');
-  iconAdd2.setAttribute('class', 'containerIcons');
-  iconAdd2.addEventListener('mouseover', function () {
-    this.src = 'img/AÑADIRACTIVO.png';
+  const iconAddHeader = document.createElement('img');
+  iconAddHeader.setAttribute('src', '../img/AÑADIRINACTIVO.png');
+  iconAddHeader.setAttribute('class', 'containerIcons');
+  iconAddHeader.setAttribute('id', 'containerIcons');
+  iconAddHeader.addEventListener('mouseover', () => {
+    iconAddHeader.src = 'img/AÑADIRACTIVO.png';
   });
-  iconAdd2.addEventListener('mouseout', function () {
-    this.src = 'img/AÑADIRINACTIVO.png';
+  iconAddHeader.addEventListener('mouseout', () => {
+    iconAddHeader.src = 'img/AÑADIRINACTIVO.png';
   });
-  iconAdd2.addEventListener('click', () => {
+  iconAddHeader.addEventListener('click', () => {
     navigateTo('/newpost');
   });
 
-  const iconProfile2 = document.createElement('img');
-  iconProfile2.setAttribute('src', '../img/PROFILE.png');
-  iconProfile2.setAttribute('class', 'containerIcons');
+  const iconProfileHeader = document.createElement('img');
+  iconProfileHeader.setAttribute('src', '../img/PROFILE.png');
+  iconProfileHeader.setAttribute('class', 'containerIcons');
 
   // ------------------------------------------------- Inicia menú de hamburguesa
   const navMenu = document.createElement('ul');
@@ -64,6 +65,7 @@ export const wall = (navigateTo) => {
   navItem.setAttribute('class', 'nav-item btn-log-out');
   navItem.textContent = 'Log Out';
 
+  // cuando el boton sea seleccionado recibira la función de log out y navegara a wall
   navItem.addEventListener('click', () => {
     exit(navigateTo);
   });
@@ -85,7 +87,7 @@ export const wall = (navigateTo) => {
   span3.setAttribute('class', 'bar');
   // ------------------------------------------------- Termina menú de hamburguesa
 
-  // ------------------------------------------------- Barra de íconos
+  // --------------------------------------------- Footer con barra de íconos para mobile y tablet
   const footer = document.createElement('footer');
   footer.setAttribute('id', 'footerWall');
 
@@ -96,43 +98,65 @@ export const wall = (navigateTo) => {
   iconSearch.setAttribute('src', '../img/LUPA.png');
 
   const iconAdd = document.createElement('img');
+  iconAdd.setAttribute('id', 'iconAdd');
   iconAdd.setAttribute('src', '../img/AÑADIRINACTIVO.png');
-  iconAdd.addEventListener('mouseover', function () {
-    this.src = 'img/AÑADIRACTIVO.png';
+
+  iconAdd.addEventListener('mouseover', () => {
+    iconAdd.src = 'img/AÑADIRACTIVO.png';
   });
-  iconAdd.addEventListener('mouseout', function () {
-    this.src = 'img/AÑADIRINACTIVO.png';
+  iconAdd.addEventListener('mouseout', () => {
+    iconAdd.src = 'img/AÑADIRINACTIVO.png';
   });
+  // Icono de añadir un nuevo post el cual navegara a la vista de newpost
   iconAdd.addEventListener('click', () => {
     navigateTo('/newpost');
   });
 
   const iconProfile = document.createElement('img');
   iconProfile.setAttribute('src', '../img/PROFILE.png');
+  // --------------------------------------------------- Termina footer de mobile y tablet
 
+  // --------------------------------------- Modal de información sobre la huella de perrito
+  const modalPaw = document.createElement('dialog');
+  modalPaw.setAttribute('class', 'modalPaw');
+
+  const paw = document.createElement('img');
+  paw.setAttribute('src', 'img/matchvacio.png');
+
+  // Nos permite ocultar el modal despúes de 5sg
+  setTimeout(() => {
+    modalPaw.remove();
+  }, 3000);
+  // Termina modal de información de huella
+
+  // sección de appends
   bodyimg.append(walldiv, footer);
-  walldiv.append(header, postsSection);
+  walldiv.append(header, modalPaw, postsSection);
+  modalPaw.append('Match to adopt ', paw);
   header.append(nav);
   nav.append(logoImg, h1, containerIcons, divMenu, navMenu);
   divMenu.append(span1, span2, span3);
   navMenu.append(navItem);
   footer.append(iconHome, iconSearch, iconAdd, iconProfile);
-  containerIcons.append(iconHome2, iconSearch2, iconAdd2, iconProfile2);
+  containerIcons.append(iconHomeHeader, iconSearchHeader, iconAddHeader, iconProfileHeader);
 
   // ------------------------------------------------- Publicaciones/posts
   // Recuperamos la colección de los "post"
   getPost((queryData) => {
+    postsSection.innerHTML = '';
+    // se recorre el post para obtener la info que se requiere de la data
     queryData.forEach((post) => {
+      // Creación de los nodos para el post
       const postArticle = document.createElement('article');
       postArticle.setAttribute('class', 'postArticle');
-      postArticle.setAttribute('data-id', post.id);
+      postArticle.setAttribute('data-id', post.id);// Identificamos a cada post su id
 
       const divUsersPointsEl = document.createElement('div');
       divUsersPointsEl.setAttribute('class', 'divUsersPointsEl');
 
       const username = document.createElement('span');
-      username.textContent = post.data().userid;
-      // obtenemos el valor de userid del display name para que se muestre en el post
+      username.textContent = post.data().username;
+      // obtenemos el valor de username del displayname para que se muestre en el post
       username.setAttribute('class', 'wallUsername');
 
       const iconoPoints = document.createElement('img');
@@ -140,7 +164,7 @@ export const wall = (navigateTo) => {
       iconoPoints.setAttribute('id', 'iconoPoints');
 
       // Menú de opciones Delete y Edit
-      const menuPoints = document.createElement('ul');
+      const menuPoints = document.createElement('dialog');
       menuPoints.setAttribute('class', 'menuPoints');
 
       const iconTrash = document.createElement('img');
@@ -164,20 +188,34 @@ export const wall = (navigateTo) => {
 
       const descriptionPet = document.createElement('p');
       descriptionPet.textContent = post.data().description;
+      // obtenemos el valor de description de la data para que se muestre en el post
       descriptionPet.setAttribute('class', 'descriptionPet');
 
+      // --------------- Contenedor de la parte inferior del post (nombre de mascota y reacciones)
       const reactionContainer = document.createElement('div');
       reactionContainer.setAttribute('class', 'reactionContainer');
 
       const namePet = document.createElement('p');
       namePet.textContent = post.data().petName;
+      // obtenemos el valor de petname de la data para que se muestre en el post
       namePet.setAttribute('class', 'namePet');
 
       const likeHeart = document.createElement('img');
-      likeHeart.setAttribute('src', 'img/like.png');
+      /* Operador ternario para identificar si existe un usuario en la data de like.
+      si existe se mostrara la img de activo, si no cambiara a la imagen de corazón blanco */
+      likeHeart.setAttribute('src', post.data().like.includes(auth.currentUser.uid) ? 'img/likeactivo.png' : 'img/like.png');
+      likeHeart.setAttribute('id', 'likeHeart');
+
+      // span para mostrar la cantidad de like que se ha dado al post
+      const likeCount = document.createElement('span');
+      likeCount.setAttribute('class', 'likeCount');
+      /* se obtiene la longitud de like,
+       el cual obtiene los id de los usuarios que han dado click al corazón. */
+      likeCount.textContent = post.data().like.length;
 
       const pawMatch = document.createElement('img');
       pawMatch.setAttribute('src', 'img/matchvacio.png');
+      pawMatch.setAttribute('id', 'pawMatch');
 
       /* Modal para mensaje de confirmación de eliminar post */
       const modal = document.createElement('dialog');
@@ -198,21 +236,21 @@ export const wall = (navigateTo) => {
       liCancel.setAttribute('class', 'liCancel ');
       liCancel.textContent = 'Cancel';
       liCancel.addEventListener('click', () => {
-        modal.close();
+        modal.remove(); // al hacer click se cierra el modal
       });
 
       // Al escoger Delete en el menú, se abre el primer modal
       liDelete.addEventListener('click', () => {
-        menuPoints.classList.remove('active');
+        menuPoints.remove();
         modal.open = true;
       });
 
-      // Al hacer clic en el menú de opciones, se cierra
+      // Al hacer clic en la x , se cierra
       iconClose.addEventListener('click', () => {
-        menuPoints.classList.remove('active');
+        menuPoints.remove();
       });
 
-      /* Mensaje de eliminado confirmado */
+      // ------------------- Mensaje de eliminado confirmado
       const modalConfirm = document.createElement('dialog');
       modalConfirm.setAttribute('id', 'modalConfirm');
 
@@ -222,8 +260,11 @@ export const wall = (navigateTo) => {
       const iconCheck = document.createElement('img');
       iconCheck.setAttribute('src', '../img/check.png');
 
+      // ------------------- Fin de mensaje eliminado
+
+      // sección de appends
       divUsersPointsEl.append(username);
-      reactionContainer.append(namePet, likeHeart, pawMatch);
+      reactionContainer.append(namePet, likeHeart, likeCount, pawMatch);
       postArticle.append(
         divUsersPointsEl,
         descriptionPet,
@@ -231,8 +272,9 @@ export const wall = (navigateTo) => {
       );
 
       modalConfirm.append(pDeleted, iconCheck);
-      // ------------------------------------------condición para menu points
-      if (post.data().userid === auth.currentUser.displayName) {
+
+      // --------------condición para el menu points, solo lo veran en el post del usuario activo
+      if (post.data().uid === auth.currentUser.uid) {
         divUsersPointsEl.append(iconoPoints);
         postArticle.append(menuPoints);
         liDelete.append(iconTrash, 'Delete');
@@ -242,83 +284,136 @@ export const wall = (navigateTo) => {
         ulModal.append(liConfirm, liCancel);
       }
 
+      // Evento de la huella para ir a adopt
+      pawMatch.addEventListener('click', () => {
+        navigateTo('/adopt');
+      });
+
       liConfirm.addEventListener('click', () => {
         // Eliminar el post
         deletePost(post.id);
         // Cerrar el modal de confirmación
-        modal.close();
+        modal.remove();
         // Mostrar el mensaje de eliminado confirmado
         modalConfirm.open = true;
         setTimeout(() => {
-          modalConfirm.close();
+          modalConfirm.remove();
         }, 3000); // 3000 milisegundos = 3 segundos
-        // Eliminar el elemento del post de la vista
-        const postElement = document.querySelector(`[data-id="${post.id}"]`);
-        if (postElement) {
-          postElement.remove();
+      });
+
+      likeHeart.addEventListener('click', () => {
+        /* Si dentro del array de la key "like" existe el uid del usuario actual,
+        entonces se quita el like */
+        if (post.data().like.includes(auth.currentUser.uid)) {
+          dislikePost(post.id);
+        } else {
+          likePost(post.id);
         }
       });
-      /* Modal para editar post */
+
+      // -------------------------------------------------------- Modal para editar post
       const modalEdit = document.createElement('dialog');
+      modalEdit.setAttribute('class', 'modalEdit');
       modalEdit.setAttribute('id', 'modalEdit');
+
+      const editContainer = document.createElement('div');
+      editContainer.setAttribute('class', 'editContainer');
 
       const cancelEdit = document.createElement('img');
       cancelEdit.setAttribute('src', '../img/cancel.png');
+      cancelEdit.setAttribute('class', 'iconClose');
+      cancelEdit.setAttribute('id', 'cancelEdit');
 
       const pEditPost = document.createElement('p');
       pEditPost.setAttribute('id', 'pEditPost');
       pEditPost.textContent = 'Edit post';
 
+      const editHr = document.createElement('hr');
+      editHr.setAttribute('class', 'editHr');
+
       const profilePic = document.createElement('img');
-      profilePic.setAttribute('src', '../img/Bob.png');
+      profilePic.setAttribute('src', '../img/profilepic.jpg');
       profilePic.setAttribute('class', 'profilePic');
 
       const userName = document.createElement('span');
       userName.setAttribute('class', 'userName');
-      userName.value = post.data().userid;
+      // insertamos el nombre del usuario
+      userName.textContent = post.data().username;
 
       const formEdit = document.createElement('form');
-      formEdit.setAttribute('id', 'formEdit');
+      formEdit.setAttribute('class', 'formEdit');
 
+      // En estos dos inputs de acontinuación se inserta la información del post a editar
       const inputEditName = document.createElement('input');
       inputEditName.setAttribute('type', 'text');
       inputEditName.setAttribute('id', 'inputEditName');
+      inputEditName.required = true;
       inputEditName.value = `${post.data().petName}`;
 
-      const inputEditDescription = document.createElement('input');
-      inputEditDescription.setAttribute('type', 'text');
+      const inputEditDescription = document.createElement('textarea');
       inputEditDescription.setAttribute('id', 'inputEditDescription');
+      inputEditDescription.setAttribute('cols', '15');
+      inputEditDescription.setAttribute('rows', '6');
+      inputEditDescription.required = true;
       inputEditDescription.value = post.data().description;
 
       const buttonEdit = document.createElement('button');
       buttonEdit.setAttribute('id', 'buttonEdit');
-      buttonEdit.textContent = 'Save';
+      buttonEdit.textContent = 'SAVE';
+
+      // Modal de edición confirmada
+      const modalConfirmEdit = document.createElement('dialog');
+      modalConfirmEdit.setAttribute('id', 'modalConfirmEdit');
+
+      const pEdit = document.createElement('p');
+      pEdit.textContent = 'Edited';
+
+      const iconCheck2 = document.createElement('img');
+      iconCheck2.setAttribute('src', '../img/check.png');
+      // Fin de modal
+
+      // Sección de addEventListener
 
       liEdit.addEventListener('click', () => {
-        menuPoints.classList.remove('active');
+        menuPoints.remove();
         modalEdit.open = true;
       });
 
       buttonEdit.addEventListener('click', (evento) => {
         evento.preventDefault();
-        editPosts(post.id, inputEditName.value, inputEditDescription.value);
-        modalEdit.close();
+        // Condición para que los inputs no se guarden vacios
+        if (inputEditName.value !== '' && inputEditDescription.value !== '') {
+          // se edita el post, y se envian los valores del input para que sean actualizados
+          editPosts(post.id, inputEditName.value, inputEditDescription.value);
+          // Cerramos el modal
+          modalEdit.remove();
+          // Abrimos modal de confirmación
+          modalConfirmEdit.open = true;
+          // lo cerramos a los 3 sg
+          setTimeout(() => {
+            modalConfirmEdit.remove();
+          }, 3000);
+        }
+      });
+
+      cancelEdit.addEventListener('click', () => {
+        modalEdit.remove();
       });
 
       iconoPoints.addEventListener('click', () => {
-        menuPoints.classList.toggle('active');
+        menuPoints.open = true;
       });
+      // Fin de addEventListener
 
-      postsSection.append(postArticle, modal, modalConfirm, modalEdit);
-      modalEdit.append(cancelEdit, pEditPost, profilePic, userName, formEdit);
+      // sección de appends
+      modalConfirmEdit.append(pEdit, iconCheck2);
+      walldiv.append(modalConfirm, modalConfirmEdit);
+      postsSection.append(postArticle, modal, modalEdit);
+      modalEdit.append(editContainer, editHr, profilePic, userName, formEdit);
       formEdit.append(inputEditName, inputEditDescription, buttonEdit);
+      editContainer.append(cancelEdit, pEditPost);
     });
   });
 
   return bodyimg;
 };
-/* function closeMenu() {
-    divMenu.classList.remove("active");
-    navMenu.classList.remove("active");
-} */
-/*   navItem.forEach(n => n.addEventListener("click", closeMenu)); */
