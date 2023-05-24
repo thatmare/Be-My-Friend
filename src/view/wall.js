@@ -126,7 +126,7 @@ export const wall = (navigateTo) => {
   // Nos permite ocultar el modal despúes de 5sg
   setTimeout(() => {
     modalPaw.remove();
-  }, 5000);
+  }, 4000);
   // Termina modal de información de huella
 
   // sección de appends
@@ -301,8 +301,7 @@ export const wall = (navigateTo) => {
         }, 3000); // 3000 milisegundos = 3 segundos
       });
 
-      likeHeart.addEventListener('click', (e) => {
-        e.preventDefault();
+      likeHeart.addEventListener('click', () => {
         /* Si dentro del array de la key "like" existe el uid del usuario actual,
         entonces se quita el like */
         if (post.data().like.includes(uid)) {
@@ -323,6 +322,7 @@ export const wall = (navigateTo) => {
       const cancelEdit = document.createElement('img');
       cancelEdit.setAttribute('src', '../img/cancel.png');
       cancelEdit.setAttribute('class', 'iconClose');
+      cancelEdit.setAttribute('id', 'cancelEdit');
 
       const pEditPost = document.createElement('p');
       pEditPost.setAttribute('id', 'pEditPost');
