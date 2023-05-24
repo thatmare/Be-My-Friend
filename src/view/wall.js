@@ -126,7 +126,7 @@ export const wall = (navigateTo) => {
   // Nos permite ocultar el modal despúes de 5sg
   setTimeout(() => {
     modalPaw.remove();
-  }, 4000);
+  }, 3000);
   // Termina modal de información de huella
 
   // sección de appends

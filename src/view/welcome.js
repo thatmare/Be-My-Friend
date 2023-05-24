@@ -252,13 +252,13 @@ export const welcome = (navigateTo) => {
   messageTestimony1.setAttribute('class', 'messagetesti');
 
   const pTestimony1 = document.createElement('p');
-  pTestimony1.innerHTML = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...”<br>-Name, City';
+  pTestimony1.innerHTML = '¡Hola a todos! Quiero compartir mi increíble experiencia utilizando la red social "Be My Friend" para adoptar a mi querida mascota. Desde el momento en que me uní a esta plataforma, supe que había encontrado el lugar perfecto para encontrar a mi nuevo compañero peludo. La cantidad de animales disponibles era impresionante: perros, gatos, conejos e incluso algunas especies exóticas.<br>-Lourdes, Santiago';
 
   const messageTestimony2 = document.createElement('div');
   messageTestimony2.setAttribute('class', 'messagetesti');
 
   const pTestimony2 = document.createElement('p');
-  pTestimony2.innerHTML = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...”<br>-Name, City';
+  pTestimony2.innerHTML = 'Finalmente, encontré a mi compañero perfecto: un encantador perro llamado Max. La experiencia de adopción a través de Be My Friend fue sencilla y sin complicaciones. Una vez que decidí adoptar a Max, todo el proceso de papeleo y trámites se llevó a cabo a través de la plataforma. La organización y el apoyo brindados por "Be My Friend" y el refugio involucrado hicieron que el proceso fuera ágil y sin estrés.<br>-Cecilia, Monterrey';
 
   // ------------------------------------------------ sección de appends
   bodyimg.append(header, main, footer());
