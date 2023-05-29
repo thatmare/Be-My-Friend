@@ -127,7 +127,7 @@ export const wall = (navigateTo) => {
   // Nos permite ocultar el modal despúes de 5sg
   setTimeout(() => {
     modalPaw.remove();
-  }, 4000);
+  }, 3000);
   // Termina modal de información de huella
 
   // sección de appends
@@ -234,7 +234,8 @@ export const wall = (navigateTo) => {
       liConfirm.textContent = 'Delete';
 
       const liCancel = document.createElement('li');
-      liCancel.setAttribute('class', 'liCancel ');
+      liCancel.setAttribute('class', 'liCancel');
+      liCancel.setAttribute('id', 'liCancel');
       liCancel.textContent = 'Cancel';
       liCancel.addEventListener('click', () => {
         modal.remove(); // al hacer click se cierra el modal
